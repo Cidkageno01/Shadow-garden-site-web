@@ -1,11 +1,21 @@
 import { defineConfig } from 'vite';
 
+// Configuration de Vite
 export default defineConfig({
+  plugins: [],
   server: {
     host: '0.0.0.0',
-    hmr: true, // Changez à `false` pour désactiver le rafraîchissement à chaud si nécessaire.
+    hmr: false, // Désactive HMR (Hot Module Replacement)
   },
   build: {
-    outDir: 'dist', // Dossier de sortie que Vercel utilisera pour servir les fichiers.
-  },
+    rollupOptions: {
+      input: {
+        main: './index.html',
+        apropos: './apropos.html',
+        galerie: './galerie.html',
+        musique: './musique.html',
+        videos: './videos.html',
+      }
+    }
+  }
 });
