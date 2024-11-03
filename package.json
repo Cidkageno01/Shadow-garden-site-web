@@ -1,17 +1,11 @@
-{
-  "name": "my-project",
-  "private": true,
-  "version": "0.0.0",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  server: {
+    host: '0.0.0.0',
+    hmr: true, // Changez cette valeur à false pour désactiver le rafraîchissement à chaud.
   },
-  "dependencies": {
-    "axios": "^1.7.7",
-    "express": "^4.21.1",
-    "fs-extra": "^11.2.0",
-    "ts-node": "^10.9.2",
-    "vite": "^5.4.8"
-  }
-}
+  build: {
+    outDir: 'dist', // Vercel déploiera par défaut depuis ce dossier.
+  },
+});
