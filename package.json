@@ -3,28 +3,9 @@
   "version": "1.0.0",
   "scripts": {
     "build": "vite build",
-    "start": "vite preview",
-    "dev": "vite"
+    "start": "vite preview"
   },
   "dependencies": {
-    "bootstrap": "^5.3.3",
-    "font-awesome": "^6.0.0-beta3",
     "vite": "^5.4.10"
-  },
-  "devDependencies": {
-    "vite-plugin-html": "^3.0.0",
-    "eslint": "^8.0.0",
-    "eslint-config-prettier": "^8.0.0",
-    "prettier": "^2.0.0"
-  },
-  "eslintConfig": {
-    "extends": [
-      "eslint:recommended",
-      "plugin:prettier/recommended"
-    ]
-  },
-  "prettier": {
-    "singleQuote": true,
-    "trailingComma": "all"
   }
 }
