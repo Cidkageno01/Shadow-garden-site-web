@@ -1,11 +1,15 @@
-import { defineConfig } from 'vite';
-
-export default defineConfig({
-  server: {
-    host: '0.0.0.0',
-    hmr: true, // Changez cette valeur à false pour désactiver le rafraîchissement à chaud.
+{
+  "name": "shadow-garden",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
-  build: {
-    outDir: 'dist', // Vercel déploiera par défaut depuis ce dossier.
-  },
-});
+  "dependencies": {
+    "axios": "^1.7.7",
+    "express": "^4.21.1",
+    "vite": "^5.4.8"
+  }
+}
