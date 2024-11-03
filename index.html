@@ -24,4 +24,99 @@
             border-radius: 5px; /* Arrondir les coins */
             padding: 10px 15px; /* Espacement intérieur */
             transition: background-color 0.3s, color 0.3s; /* Transition pour les effets */
-      
+        }
+        .nav-link:hover {
+            background-color: #a857e5; /* Changer la couleur de fond au survol */
+            color: #000; /* Changer la couleur du texte au survol */
+        }
+        .hero {
+            background-image: url('https://i.imgur.com/JHotItP.jpeg');
+            height: 400px;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            text-align: center;
+            color: white;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+            animation: glowing 1.5s infinite alternate;
+        }
+        .section-title {
+            margin-top: 50px;
+            font-size: 2rem;
+            color: #ffcc00;
+        }
+        @keyframes glowing {
+            0% { text-shadow: 0 0 5px #a857e5, 0 0 10px #a857e5, 0 0 20px #ffcc00; }
+            100% { text-shadow: 0 0 10px #a857e5, 0 0 20px #a857e5, 0 0 30px #ffcc00; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        #snakeimg {
+            width: 250px;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="#">Shadow Garden</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="galerie.html">Galerie</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="videos.html">Vidéos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="musique.html">Musique</a>
+                </li>
+                <li class="nav-item">
+                    <a href="apropos.html" class="text-warning nav-link">À propos</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="hero">
+    <h1>𝐁𝐢𝐞𝐧𝐯𝐞𝐧𝐮𝐞 𝐃𝐚𝐧𝐬 𝐋'𝐨𝐫𝐠𝐚𝐧𝐢𝐬𝐚𝐭𝐢𝐨𝐧 ༼༗𝐒𝐡𝐚𝐝𝐨𝐰❦𝐆𝐚𝐫𝐝𝐞𝐧༗༽ </h1>
+</div>
+
+<div class="container">
+    <h2 class="section-title">À propos de ࿐ཽ༵c̸i̸d̸×͜×k̸a̸g̸e̸n̸o̸☠</h2>
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <img src="https://i.imgur.com/JHotItP.jpeg" alt="☛║❦『S̸H̸A̸D̸O̸W̸』❦║☚" class="img-thumbnail rounded-circle" id="snakeimg">
+        </div>
+        <div class="col-md-6">
+            <h3 class="text-warning">Mon histoire</h3>
+            <p>Marc est passionnée par l'art, la musique et les cultures du mondMan parcours unique l'a menée à créer cet espace où il partage ses créations et inspirations.</p>
+        </div>
+    </div>
+</div>
+
+<footer class="py-4 text-center">
+    <span class="text-light">&copy; 2024 Shadow Garden | By Cid kageno</span>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+            </html>
