@@ -1,15 +1,12 @@
 {
   "name": "shadow-garden",
   "version": "1.0.0",
-  "private": true,
   "scripts": {
-    "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "start": "vite preview"
   },
   "dependencies": {
-    "axios": "^1.7.7",
-    "express": "^4.21.1",
-    "vite": "^5.4.8"
+    "vite": "^5.4.10"
+    // Ajoutez ici d'autres dépendances si nécessaire
   }
 }
