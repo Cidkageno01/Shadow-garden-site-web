@@ -19,16 +19,6 @@
         .navbar-brand, .nav-link {
             color: #a857e5 !important;
         }
-        .nav-link {
-            border: 2px solid #a857e5;
-            border-radius: 5px;
-            padding: 10px 15px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        .nav-link:hover {
-            background-color: #a857e5;
-            color: #000;
-        }
         .hero {
             background-image: url('https://i.imgur.com/JHotItP.jpeg');
             height: 400px;
@@ -38,18 +28,9 @@
             align-items: center;
             text-align: center;
             color: white;
-            animation: fadeIn 2s ease-in-out;
         }
         .hero h1 {
             font-size: 3rem;
-            text-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
-            animation: glowing 1.5s infinite alternate;
-        }
-        .section-title {
-            margin-top: 50px;
-            font-size: 2rem;
-            color: #ffcc00;
-            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
         .song-card {
             background-color: #222;
@@ -57,50 +38,18 @@
             padding: 15px;
             margin-bottom: 20px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
         }
-        .song-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.7);
+        .song-card img {
+            max-height: 150px;
+            border-radius: 10px;
         }
-        @keyframes glowing {
-            0% { text-shadow: 0 0 5px #a857e5, 0 0 10px #a857e5, 0 0 20px #ffcc00; }
-            100% { text-shadow: 0 0 10px #a857e5, 0 0 20px #a857e5, 0 0 30px #ffcc00; }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        .border-animation {
-            border: 5px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
-        .border-animation::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, #a857e5, #ffcc00, #a857e5);
-            background-size: 400%;
-            animation: borderMove 5s linear infinite;
-            z-index: 0;
-            filter: blur(10px);
-        }
-        .border-animation * {
-            position: relative;
-            z-index: 1;
-        }
-        @keyframes borderMove {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 100% 100%; }
+        .song-card h5 {
+            color: #ffcc00;
         }
     </style>
 </head>
 <body>
-
 <nav class="navbar navbar-expand-lg">
     <div class="container">
         <a class="navbar-brand fw-bold" href="#">Shadow Garden</a>
@@ -120,11 +69,11 @@
 </nav>
 
 <div class="hero">
-    <h1>Musique Spotify</h1>
+    <h1>Musique Deezer</h1>
 </div>
 
 <div class="container my-5">
-    <h2 class="section-title text-center">Recherchez vos chansons préférées</h2>
+    <h2 class="text-center">Recherchez vos chansons préférées</h2>
     <div class="input-group my-4">
         <input type="text" id="searchQuery" class="form-control" placeholder="Entrez le nom de la chanson ou de l'artiste">
         <button id="searchButton" class="btn btn-outline-light"><i class="fas fa-search"></i></button>
@@ -139,90 +88,38 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-// Token d'autorisation de l'API Spotify
-const token = 'BQBT6IhIbemO2vMoE-OvELIaS9ccGFttiLMYX5w9pxm_ujRcMWC8ie_9McFaalguFcZxHMns1_4LRsgbNKJT6S1DXOgQd3jtnluAWL40HB6B1n6e5lyRRzSPLgimgv4U5_Clk_6z9_x3dLJPho3LproDGCzM2vAoXPskpJiStAPwz070FpFnZAyX_8i5a5SIT7m40Laz-B0mBhW8Sh7JmNnmg4mQ0RLDNVtAlRH5TJxA8-erRpxX1KBMoHv42Bki4inwD6BRLKA3xkDXG9i7zPhUfZqZwS6R';
-
-async function fetchWebApi(endpoint, method, body = null) {
-    const res = await fetch(`https://api.spotify.com/${endpoint}`, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-        },
-        method,
-        body: body ? JSON.stringify(body) : null
-    });
-    return await res.json();
-}
-
-async function getTopTracks() {
-    return (await fetchWebApi('v1/me/top/tracks?time_range=long_term&limit=5', 'GET')).items;
-}
-
-async function searchTracks(query) {
-    const response = await fetchWebApi(`v1/search?q=${encodeURIComponent(query)}&type=track`, 'GET');
-    return response.tracks.items;
-}
-
 document.getElementById("searchButton").addEventListener("click", async () => {
     const query = document.getElementById("searchQuery").value;
     if (!query) return alert("Veuillez entrer un nom de chanson ou un artiste.");
-
+    
+    const resultsContainer = document.getElementById("results");
+    resultsContainer.innerHTML = "";
+    
     try {
-        const resultsContainer = document.getElementById("results");
-        resultsContainer.innerHTML = "";
-        
-        // Recherche de chansons
-        const tracks = await searchTracks(query);
-        
+        // Appel à l'API Deezer
+        const response = await axios.get(`https://api.deezer.com/search?q=${encodeURIComponent(query)}`);
+        const tracks = response.data.data;
+
+        // Affichage des résultats
         tracks.forEach(track => {
             const songCard = document.createElement("div");
-            songCard.className = "col-md-4 song-card border-animation";
+            songCard.className = "col-md-4 song-card";
             songCard.innerHTML = `
-                <div class="card-body text-center">
-                    <img src="${track.album.images[0]?.url}" alt="Album cover" class="img-fluid rounded mb-3" style="max-height: 150px;">
-                    <h5 class="card-title text-light">${track.name}</h5>
-                    <p class="card-text text-muted">Artiste: ${track.artists.map(artist => artist.name).join(', ')}</p>
-                    <audio controls class="w-100 mt-2">
-                        <source src="${track.preview_url}" type="audio/mpeg">
-                        Votre navigateur ne supporte pas l'audio.
-                    </audio>
-                </div>
+                <img src="${track.album.cover_medium}" alt="Album cover" class="img-fluid mb-3">
+                <h5>${track.title}</h5>
+                <p class="text-muted">${track.artist.name}</p>
+                <audio controls class="w-100">
+                    <source src="${track.preview}" type="audio/mpeg">
+                    Votre navigateur ne supporte pas l'audio.
+                </audio>
             `;
             resultsContainer.appendChild(songCard);
         });
     } catch (error) {
         console.error("Erreur lors de la recherche :", error);
-        alert("Erreur lors de la recherche de la chanson.");
+        alert("Erreur lors de la recherche des chansons.");
     }
 });
-
-// Charger les chansons préférées à l'ouverture de la page
-window.onload = async () => {
-    try {
-        const topTracks = await getTopTracks();
-        const resultsContainer = document.getElementById("results");
-        topTracks.forEach(track => {
-            const songCard = document.createElement("div");
-            songCard.className = "col-md-4 song-card border-animation";
-            songCard.innerHTML = `
-                <div class="card-body text-center">
-                    <img src="${track.album.images[0]?.url}" alt="Album cover" class="img-fluid rounded mb-3" style="max-height: 150px;">
-                    <h5 class="card-title text-light">${track.name}</h5>
-                    <p class="card-text text-muted">Artiste: ${track.artists.map(artist => artist.name).join(', ')}</p>
-                    <audio controls class="w-100 mt-2">
-                        <source src="${track.preview_url}" type="audio/mpeg">
-                        Votre navigateur ne supporte pas l'audio.
-                    </audio>
-                </div>
-            `;
-            resultsContainer.appendChild(songCard);
-        });
-    } catch (error) {
-        console.error("Erreur lors du chargement des chansons préférées :", error);
-        alert("Erreur lors du chargement des chansons préférées.");
-    }
-};
 </script>
-
 </body>
-    </html>
+</html>
